@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>XYLON® – Roblox Services Platform</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <style>
+    :root {
+      --bg-main: #0b0e14;
+      --bg-card: #121826;
+      --accent: #4da3ff;
+      --accent-soft: #2b6cb0;
+      --text-main: #e6e9ef;
+      --text-muted: #9aa4b2;
+      --border: #1f2937;
+      --radius: 14px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Arial, sans-serif;
+      background: var(--bg-main);
+      color: var(--text-main);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* =========================
+       Animated Background
+       ========================= */
+    .animated-bg {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      overflow: hidden;
+    }
+
+    .bg-layer {
+      position: absolute;
+      inset: -20%;
+      animation-iteration-count: infinite;
+      animation-timing-function: linear;
+    }
+
+    .bg-layer.gradient {
+      background:
+        radial-gradient(800px 500px at 20% 10%, #1a2c66 0%, transparent 60%),
+        radial-gradient(700px 400px at 80% 30%, #0f3b66 0%, transparent 55%);
+      animation: gradientShift 40s infinite alternate;
+    }
+
+    .bg-layer.grid {
+      background-image:
+        linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+      background-size: 80px 80px;
+      animation: gridMove 60s infinite linear;
+      opacity: 0.25;
+    }
+
+    .bg-layer.glow {
+      background: radial-gradient(
+        600px 300px at 50% 80%,
+        rgba(77,163,255,0.12),
+        transparent 70%
+      );
+      animation: glowPulse 12s infinite ease-in-out;
+    }
+
+    @keyframes gradientShift {
+      from { transform: translateY(0) rotate(0deg); }
+      to   { transform: translateY(-120px) rotate(4deg); }
+    }
+
+    @keyframes gridMove {
+      from { transform: translateY(0); }
+      to   { transform: translateY(-160px); }
+    }
+
+    @keyframes glowPulse {
+      0%, 100% { opacity: 0.6; }
+      50% { opacity: 1; }
+    }
+
+    /* =========================
+       Layout
+       ========================= */
+    header {
+      padding: 48px 24px 32px;
+      text-align: center;
+    }
+
+    .brand {
+      font-size: 3rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+    }
+
+    .brand span {
+      color: var(--accent);
+    }
+
+    .tagline {
+      max-width: 720px;
+      margin: 16px auto 0;
+      color: var(--text-muted);
+      font-size: 1.1rem;
+    }
+
+    main {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 32px 24px 64px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 24px;
+      margin-bottom: 48px;
+    }
+
+    .card {
+      background: linear-gradient(180deg, #141b2e 0%, var(--bg-card) 100%);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
+    }
+
+    .card h3 {
+      margin-top: 0;
+      font-size: 1.25rem;
+      color: var(--accent);
+    }
+
+    .card p {
+      margin-bottom: 0;
+      color: var(--text-muted);
+    }
+
+    /* =========================
+       CTA / Sign-in
+       ========================= */
+    .cta {
+      display: flex;
+      justify-content: center;
+      margin-top: 32px;
+    }
+
+    .signin-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 22px;
+      font-size: 1rem;
+      font-weight: 600;
+      border-radius: 999px;
+      border: 1px solid var(--accent-soft);
+      background: linear-gradient(180deg, #4da3ff 0%, #2b6cb0 100%);
+      color: #ffffff;
+      cursor: pointer;
+      transition: transform 0.15s ease, box-shadow 0.15s ease, opacity 0.15s ease;
+      box-shadow: 0 10px 30px rgba(77, 163, 255, 0.35);
+    }
+
+    .signin-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 14px 40px rgba(77, 163, 255, 0.45);
+      opacity: 0.95;
+    }
+
+    .signin-btn img {
+      width: 20px;
+      height: 20px;
+    }
+
+    /* =========================
+       Iframe Modal
+       ========================= */
+    .iframe-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(5, 8, 15, 0.85);
+      backdrop-filter: blur(6px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+    }
+
+    .iframe-modal {
+      width: min(960px, 92vw);
+      height: min(640px, 85vh);
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: 0 40px 80px rgba(0, 0, 0, 0.6);
+    }
+
+    .iframe-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 16px;
+      background: #0f1524;
+      border-bottom: 1px solid var(--border);
+      font-weight: 600;
+    }
+
+    .iframe-header button {
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      font-size: 1.1rem;
+      cursor: pointer;
+    }
+
+    .iframe-header button:hover {
+      color: var(--text-main);
+    }
+
+    iframe {
+      width: 100%;
+      height: calc(100% - 48px);
+      border: none;
+      background: #000;
+    }
+
+    footer {
+      text-align: center;
+      padding: 24px;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    footer strong {
+      color: var(--text-main);
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Animated background -->
+  <div class="animated-bg">
+    <div class="bg-layer gradient"></div>
+    <div class="bg-layer grid"></div>
+    <div class="bg-layer glow"></div>
+  </div>
+
+  <header>
+    <div class="brand">XYLON<span>®</span></div>
+    <div class="tagline">
+      A modern Roblox services platform delivering insight, customization, and performance at scale.
+    </div>
+  </header>
+
+  <main>
+    <section class="grid">
+      <div class="card">
+        <h3>Stat Tracking</h3>
+        <p>
+          Advanced analytics for player behavior, progression,
+          and historical performance across Roblox experiences.
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>Avatar Services</h3>
+        <p>
+          Avatar inspection, asset intelligence, and identity-linked
+          customization powered by Roblox data.
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>Developer Tools</h3>
+        <p>
+          APIs, dashboards, and moderation insight tools
+          built for serious Roblox developers.
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>More Coming</h3>
+        <p>
+          XYLON® is actively expanding with new services,
+          deeper integrations, and platform-level tooling.
+        </p>
+      </div>
+    </section>
+
+    <section class="cta">
+      <button class="signin-btn" id="signinRoblox">
+        <img id="rblxIcon" alt="Roblox" />
+        Sign in with Roblox
+      </button>
+    </section>
+  </main>
+
+  <footer>
+    © <strong>XYLON®</strong>. All rights reserved.
+  </footer>
+
+  <!-- Auth Modal -->
+  <div class="iframe-backdrop" id="authBackdrop">
+    <div class="iframe-modal">
+      <div class="iframe-header">
+        <span>Sign in with Roblox</span>
+        <button id="closeIframe">✕</button>
+      </div>
+      <iframe id="authIframe"></iframe>
+    </div>
+  </div>
+
+  <script>
+    const signinBtn = document.getElementById("signinRoblox");
+    const backdrop = document.getElementById("authBackdrop");
+    const iframe = document.getElementById("authIframe");
+    const closeBtn = document.getElementById("closeIframe");
+    const icon = document.getElementById("rblxIcon");
+
+    // Handle icon path (GitHub Pages vs normal hosting)
+    icon.src = window.location.pathname.endsWith(".html")
+      ? "rblxlogo.png"
+      : "/rblxlogo.png";
+
+    function getAuthPath() {
+      return window.location.pathname.endsWith(".html")
+        ? "roblox-auth-2.html"
+        : "/roblox-auth-2.html";
+    }
+
+    signinBtn.addEventListener("click", () => {
+      iframe.src = getAuthPath();
+      backdrop.style.display = "flex";
+    });
+
+    closeBtn.addEventListener("click", closeModal);
+    backdrop.addEventListener("click", e => {
+      if (e.target === backdrop) closeModal();
+    });
+
+    function closeModal() {
+      iframe.src = "";
+      backdrop.style.display = "none";
+    }
+  </script>
+</body>
+</html>
