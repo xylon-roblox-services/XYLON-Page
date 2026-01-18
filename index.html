@@ -3,9 +3,143 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>XYLON® – Under Construction</title>
+<style>
+:root {
+  --bg-main: #0b0e14;
+  --accent: #4da3ff;
+  --accent-soft: #2b6cb0;
+  --text-main: #e6e9ef;
+  --text-muted: #9aa4b2;
+  --border: #1f2937;
+  --radius: 16px;
+}
+
+/* Reset & base */
+* { box-sizing: border-box; margin:0; padding:0; }
+body { 
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Ubuntu, Cantarell, Arial, sans-serif;
+  color: var(--text-main); 
+  background: var(--bg-main);
+  overflow-x: hidden; 
+  display:flex; flex-direction:column; justify-content:center; align-items:center; height:100vh; text-align:center;
+}
+
+/* Animated background */
+.animated-bg{position:fixed; inset:0; z-index:-1; overflow:hidden;}
+.bg-layer{position:absolute; inset:-20%; animation-iteration-count: infinite;}
+.bg-layer.gradient{
+  background: radial-gradient(900px 500px at 25% 10%, #1a2c66 0%, transparent 60%),
+              radial-gradient(800px 400px at 75% 30%, #0f3b66 0%, transparent 55%);
+  animation: gradientShift 50s infinite alternate;
+  opacity:0.7;
+}
+.bg-layer.grid{
+  background-image: linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+  background-size: 100px 100px;
+  animation: gridMove 60s linear infinite;
+  opacity:0.15;
+}
+.bg-layer.glow{
+  background: radial-gradient(700px 350px at 50% 80%, rgba(77,163,255,0.15), transparent 70%);
+  animation: glowPulse 15s ease-in-out infinite;
+}
+@keyframes gradientShift { from {transform: translateY(0) rotate(0deg);} to {transform: translateY(-150px) rotate(5deg);} }
+@keyframes gridMove { from {transform: translateY(0);} to {transform: translateY(-180px);} }
+@keyframes glowPulse { 0%,100% {opacity:0.6;} 50%{opacity:1;} }
+
+/* Card-style container */
+.container {
+  background: linear-gradient(180deg,#141b2e 0%, #121826 100%);
+  border:1px solid var(--border);
+  border-radius: var(--radius);
+  padding:40px 30px;
+  box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+  max-width: 480px;
+}
+
+h1 { 
+  font-size: 2.8rem; 
+  color: var(--accent);
+  margin-bottom:16px;
+}
+h2 {
+  font-size: 1.2rem;
+  color: var(--text-muted);
+  margin-bottom:20px;
+  font-weight:400;
+}
+p {
+  font-size: 1rem;
+  color: var(--text-muted);
+  line-height:1.5;
+}
+
+/* Icon */
+.icon {
+  font-size: 3.5rem;
+  margin-bottom:20px;
+  display:block;
+}
+
+/* Optional pulse animation for icon */
+.icon {
+  animation: pulse 1.5s ease-in-out infinite alternate;
+}
+@keyframes pulse { from {opacity:0.7; transform: scale(1);} to {opacity:1; transform: scale(1.05);} }
+
+/* Footer */
+footer {
+  margin-top:32px;
+  font-size:0.9rem;
+  color: var(--text-muted);
+}
+footer strong { color: var(--text-main); }
+</style>
+</head>
+<body>
+
+<!-- Animated background -->
+<div class="animated-bg" aria-hidden="true">
+  <div class="bg-layer gradient"></div>
+  <div class="bg-layer grid"></div>
+  <div class="bg-layer glow"></div>
+</div>
+
+<div class="container" role="alert">
+  <span class="icon">⚠️</span>
+  <h1>Site Under Construction</h1>
+  <h2>We’re working hard behind the scenes</h2>
+  <p>XYLON® is being updated and improved. Our platform will be back online shortly with better features, analytics, and tools for Roblox creators. Thank you for your patience!</p>
+</div>
+
+<footer>
+  © <strong>XYLON®</strong>. All rights reserved.
+</footer>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>XYLON® – Roblox Services Platform</title>
 
 <!-- Favicon -->
+
 <link rel="icon" type="image/png" href="xylonicon.png" />
 
 <style>
